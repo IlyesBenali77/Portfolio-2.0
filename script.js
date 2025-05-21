@@ -116,23 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Animation des compétences
-window.addEventListener('scroll', () => {
-  const skillBars = document.querySelectorAll('.skill-level');
-  const skillsSection = document.querySelector('#skills');
-  
-  if (isElementInViewport(skillsSection)) {
-    skillBars.forEach(bar => {
-      const width = bar.style.width;
-      bar.style.width = '0';
-      setTimeout(() => {
-        bar.style.width = width;
-        bar.style.transition = 'width 1s ease-in-out';
-      }, 200);
-    });
-  }
-});
-
 // Vérifier si un élément est visible dans la fenêtre
 function isElementInViewport(el) {
   const rect = el.getBoundingClientRect();
@@ -142,83 +125,34 @@ function isElementInViewport(el) {
   );
 }
 
-// Animation au chargement de la page
-window.addEventListener('load', () => {
-  // Animation du titre principal
-  const heroTitle = document.querySelector('.hero-text h1');
-  const heroSubtitle = document.querySelector('.hero-text h2');
-  const heroDescription = document.querySelector('.hero-text p');
-  const heroButtons = document.querySelector('.hero-buttons');
-  const heroImage = document.querySelector('.hero-image');
+// Supprimer les animations qui causent le délai d'affichage
+document.addEventListener('DOMContentLoaded', () => {
+  // Rendre tous les éléments immédiatement visibles
+  document.querySelectorAll('section').forEach(section => {
+    section.style.opacity = '1';
+    section.style.transform = 'translateY(0)';
+  });
   
-  heroTitle.style.animation = 'fadeInDown 1s ease forwards';
-  heroSubtitle.style.animation = 'fadeInDown 1s ease 0.3s forwards';
-  heroDescription.style.animation = 'fadeInDown 1s ease 0.6s forwards';
-  heroButtons.style.animation = 'fadeInUp 1s ease 0.9s forwards';
-  heroImage.style.animation = 'fadeIn 1s ease 1.2s forwards';
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.style.opacity = '1';
+    card.style.transform = 'translateY(0)';
+  });
   
-  // Ajouter des classes d'opacité initiale
-  heroTitle.style.opacity = '0';
-  heroSubtitle.style.opacity = '0';
-  heroDescription.style.opacity = '0';
-  heroButtons.style.opacity = '0';
-  heroImage.style.opacity = '0';
-});
-
-// Animations au défilement
-const observerOptions = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.1
-};
-
-const observer = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('animate');
-      observer.unobserve(entry.target);
+  // Rendre les éléments du hero immédiatement visibles
+  const heroElements = [
+    document.querySelector('.hero-text h1'),
+    document.querySelector('.hero-text h2'),
+    document.querySelector('.hero-text p'),
+    document.querySelector('.hero-buttons'),
+    document.querySelector('.hero-image')
+  ];
+  
+  heroElements.forEach(el => {
+    if (el) {
+      el.style.opacity = '1';
+      el.style.animation = 'none';
     }
   });
-}, observerOptions);
-
-// Observer les sections
-document.querySelectorAll('section').forEach(section => {
-  section.style.opacity = '0';
-  section.style.transform = 'translateY(50px)';
-  section.style.transition = 'opacity 1s ease, transform 1s ease';
-  observer.observe(section);
-});
-
-// Ajouter une classe d'animation lors de l'entrée dans le viewport
-document.addEventListener('DOMContentLoaded', () => {
-  const animateOnScroll = () => {
-    document.querySelectorAll('section').forEach(section => {
-      if (isElementInViewport(section) && !section.classList.contains('animate')) {
-        section.classList.add('animate');
-        section.style.opacity = '1';
-        section.style.transform = 'translateY(0)';
-      }
-    });
-    
-    document.querySelectorAll('.project-card').forEach(card => {
-      if (isElementInViewport(card) && !card.classList.contains('animate')) {
-        card.classList.add('animate');
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
-      }
-    });
-  };
-  
-  // Initialiser les styles pour l'animation au scroll
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(50px)';
-    card.style.transition = 'opacity 1s ease, transform 1s ease';
-  });
-  
-  // Déclencher l'animation au scroll
-  window.addEventListener('scroll', animateOnScroll);
-  animateOnScroll(); // Déclencher une première fois au chargement
 });
 
 // Ajouter des animations CSS

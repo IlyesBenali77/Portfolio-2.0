@@ -267,13 +267,10 @@ header {
 }
 
 .profile-image {
-  width: 350px;
-  height: 350px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 50%;
-  border: 5px solid var(--light-color);
-  box-shadow: var(--shadow);
-  overflow: hidden;
+  border-radius: 20px;
 }
 
 .scroll-down {
@@ -375,18 +372,10 @@ section {
 }
 
 .about-profile-image {
-  width: 350px;
-  height: 350px;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border: 5px solid var(--primary-color);
-  box-shadow: var(--shadow);
-  transition: transform 0.3s ease;
-  overflow: hidden;
-}
-
-.about-profile-image:hover {
-  transform: scale(1.05);
+  border-radius: 20px;
 }
 
 .personal-info {
@@ -917,19 +906,6 @@ embed.profile-image, embed.about-profile-image {
   position: relative;
   border: 5px solid var(--light-color);
   box-shadow: var(--shadow);
-}
-
-.pdf-circle iframe {
-  width: 300%;
-  height: 300%;
-  border: none;
-  position: absolute;
-  top: -100%;
-  left: -100%;
-  right: 0;
-  bottom: 0;
-  transform: scale(0.6);
-  transform-origin: center;
 }
 
 .about-image .pdf-circle {
